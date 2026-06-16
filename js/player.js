@@ -78,41 +78,17 @@ const Player = {
     const source = this.sources[index];
     const playerEl = document.getElementById('stream-player');
     if (!playerEl) return;
-    if (this.isMobile) {
-      this.renderMobilePlayer(playerEl, source);
-    } else {
-      this.renderDesktopPlayer(playerEl, source);
-    }
+    playerEl.innerHTML = `
+      <iframe 
+        src="${source.embedUrl}"
+        frameborder="0"
+        allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+        allowfullscreen
+        referrerpolicy="no-referrer"
+        style="width:100%;height:100%;border:0;position:absolute;top:0;left:0;"
+      ></iframe>`;
     this.updateOpenButton();
     this.highlightSource(index);
-  },
-
-  renderDesktopPlayer(playerEl, source) {
-    playerEl.innerHTML = `
-      <div class="player-embed-wrap">
-        <iframe 
-          src="${source.embedUrl}"
-          frameborder="0"
-          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-          allowfullscreen
-          referrerpolicy="no-referrer"
-          style="width:100%;height:100%;border:0;position:absolute;top:0;left:0;"
-        ></iframe>
-        <div class="player-embed-bar">
-          <button class="open-browser-btn" onclick="Player.openInBrowser()">🌐 Open in Browser</button>
-          <span class="player-embed-hint">If black screen, tap Open in Browser</span>
-        </div>
-      </div>`;
-  },
-
-  renderMobilePlayer(playerEl, source) {
-    playerEl.innerHTML = `
-      <div class="mobile-player-fallback">
-        <div class="mobile-player-icon">📺</div>
-        <div class="mobile-player-title">Tap to watch</div>
-        <div class="mobile-player-desc">Stream opens in your browser</div>
-        <a href="${source.embedUrl}" target="_blank" rel="noopener" class="mobile-player-btn">▶ Watch Stream</a>
-      </div>`;
   },
 
   openInBrowser() {
@@ -158,7 +134,7 @@ const Player = {
         `).join('')}
       </div>
       <div class="source-footer">
-        <span>💡 Install <strong>uBlock Origin</strong> (free ad blocker) for fewer ads</span>
+        <span>💡 To block ads on mobile: set Private DNS to <strong>dns.adguard.com</strong> (Settings → Connections → Private DNS)</span>
       </div>`;
   },
 
