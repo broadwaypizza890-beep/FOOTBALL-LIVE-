@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FootFlow - Free Live Football Streaming</title>
+  <meta name="description" content="Watch live football streams for free. Premier League, La Liga, Champions League, Serie A, Bundesliga and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300e676'/><text x='16' y='22' text-anchor='middle' font-size='18' font-weight='bold' fill='%23000'>F</text></svg>">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon">⚽</span>
+      <span>FootFlow</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#sports">Sports</a>
+      <a href="#tv">TV</a>
+      <a href="#leagues">Leagues</a>
+      <a href="#cups">Cups</a>
+      <a href="#standings">Standings</a>
+    </div>
+    <button class="hamburger" aria-label="Menu">☰</button>
+  </nav>
+
+  <main class="container" id="main-content">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading FootFlow...</p>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
