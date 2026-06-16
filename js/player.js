@@ -3,6 +3,7 @@ const Player = {
   currentCategory: 'football',
   currentSourceIndex: 0,
   sources: [],
+  isMobile: window.innerWidth < 768 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent),
 
   async init(matchId, category) {
     this.currentMatchId = matchId;
@@ -77,6 +78,16 @@ const Player = {
     const source = this.sources[index];
     const playerEl = document.getElementById('stream-player');
     if (!playerEl) return;
+    if (this.isMobile) {
+      this.renderMobilePlayer(playerEl, source);
+    } else {
+      this.renderDesktopPlayer(playerEl, source);
+    }
+    this.updateOpenButton();
+    this.highlightSource(index);
+  },
+
+  renderDesktopPlayer(playerEl, source) {
     playerEl.innerHTML = `
       <div class="player-embed-wrap">
         <iframe 
@@ -92,8 +103,16 @@ const Player = {
           <span class="player-embed-hint">If black screen, tap Open in Browser</span>
         </div>
       </div>`;
-    this.updateOpenButton();
-    this.highlightSource(index);
+  },
+
+  renderMobilePlayer(playerEl, source) {
+    playerEl.innerHTML = `
+      <div class="mobile-player-fallback">
+        <div class="mobile-player-icon">📺</div>
+        <div class="mobile-player-title">Tap to watch</div>
+        <div class="mobile-player-desc">Stream opens in your browser</div>
+        <a href="${source.embedUrl}" target="_blank" rel="noopener" class="mobile-player-btn">▶ Watch Stream</a>
+      </div>`;
   },
 
   openInBrowser() {

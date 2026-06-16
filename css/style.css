@@ -816,7 +816,52 @@ a {
   white-space: nowrap;
 }
 
-.source-external {
+/* ===== MOBILE PLAYER ===== */
+.mobile-player-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: var(--card);
+  border-radius: var(--radius);
+  text-align: center;
+  gap: 8px;
+}
+
+.mobile-player-icon {
+  font-size: 48px;
+  margin-bottom: 4px;
+}
+
+.mobile-player-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mobile-player-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.mobile-player-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  background: var(--primary);
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.mobile-player-btn:hover {
+  background: #00c853;
+}
+
+/* ===== SOURCE LIST ===== */
   display: inline-flex;
   align-items: center;
   justify-content: center;
