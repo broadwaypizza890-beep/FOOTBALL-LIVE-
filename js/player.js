@@ -78,16 +78,39 @@ const Player = {
     const playerEl = document.getElementById('stream-player');
     if (!playerEl) return;
     playerEl.innerHTML = `
-      <iframe 
-        src="${source.embedUrl}"
-        frameborder="0"
-        allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-        allowfullscreen
-        referrerpolicy="no-referrer"
-
-        style="width:100%;height:100%;border:0;position:absolute;top:0;left:0;"
-      ></iframe>`;
+      <div class="player-embed-wrap">
+        <iframe 
+          src="${source.embedUrl}"
+          frameborder="0"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+          allowfullscreen
+          referrerpolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+          style="width:100%;height:100%;border:0;position:absolute;top:0;left:0;"
+        ></iframe>
+        <div class="player-embed-bar">
+          <button class="open-browser-btn" onclick="Player.openInBrowser()">🌐 Open in Browser</button>
+          <span class="player-embed-hint">If black screen, tap Open in Browser</span>
+        </div>
+      </div>`;
+    this.updateOpenButton();
     this.highlightSource(index);
+  },
+
+  openInBrowser() {
+    const source = this.sources[this.currentSourceIndex];
+    if (source && source.embedUrl) {
+      window.open(source.embedUrl, '_blank', 'noopener');
+    }
+  },
+
+  updateOpenButton() {
+    const btn = document.querySelector('.open-browser-btn');
+    if (!btn) return;
+    const source = this.sources[this.currentSourceIndex];
+    if (source) {
+      btn.onclick = () => window.open(source.embedUrl, '_blank', 'noopener');
+    }
   },
 
   renderSourceList() {
@@ -112,8 +135,12 @@ const Player = {
                 ${s.viewers > 0 ? `<span class="viewers">${s.viewers} 👁</span>` : ''}
               </span>
             </span>
+            <span class="source-external" onclick="event.stopPropagation();window.open('${s.embedUrl}','_blank','noopener')" title="Open in browser">↗</span>
           </button>
         `).join('')}
+      </div>
+      <div class="source-footer">
+        <span>💡 Install <strong>uBlock Origin</strong> (free ad blocker) for fewer ads</span>
       </div>`;
   },
 
